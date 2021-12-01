@@ -25,7 +25,6 @@ export class AuthComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.usersList();
   }
 
   createForm() {
@@ -53,10 +52,14 @@ export class AuthComponent implements OnInit {
       (user) => {
         const tokenDecoded = jwtDecode(user.token) as { exp: number };
         if (Date.now() > tokenDecoded.exp * 1000) {
+          localStorage.removeItem('token');
           this.errorSignIn = 'Token has expired';
           throw new Error('Token has expired');
         }
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('token', user.token);
+        localStorage.setItem('email', user.email);
+
         this.router.navigate(['']);
       },
       (err) => (this.errorSignIn = err.error)
@@ -68,17 +71,16 @@ export class AuthComponent implements OnInit {
       (user) => {
         const tokenDecoded = jwtDecode(user.token) as { exp: number };
         if (Date.now() > tokenDecoded.exp * 1000) {
+          localStorage.removeItem('token');
           this.errorSignUp = 'Token has expired';
           throw new Error('Token has expired');
         }
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('token', user.token);
+        localStorage.setItem('email', user.email);
         this.router.navigate(['']);
       },
       (err) => (this.errorSignUp = err.error)
     );
-  }
-
-  usersList() {
-    this.authService.getConfig().subscribe((data) => console.log(data));
   }
 }

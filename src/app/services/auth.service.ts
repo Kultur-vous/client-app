@@ -1,30 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
-
-export interface UserSignIn {
-  email: string;
-  password: string;
-  token: string;
-}
-
-export interface UserSignUp {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  token: string;
-}
+import { Injectable } from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import { UserSignIn } from '../types/auth';
 
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  msAuthUrl = 'http://localhost:3000';
-
-  getConfig() {
-    return this.http.get(`${this.msAuthUrl}/users`);
-  }
+  msAuthUrl = 'https://boo-user.herokuapp.com';
 
   logIn(user: UserSignIn): Observable<UserSignIn> {
     return this.http.post<UserSignIn>(`${this.msAuthUrl}/sign-in`, user).pipe(

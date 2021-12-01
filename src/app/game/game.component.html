@@ -1,1 +1,20 @@
-<p>game works!</p>
+<form [formGroup]="myForm" novalidate (ngSubmit)="onSubmit()" class="form">
+  <div formArrayName="myChoices">
+    <div *ngFor="let question of questions; index as i" class="question">
+      <label>
+        {{ question.title }}
+      </label>
+      <nz-radio-group nzButtonStyle="solid" formControlName="{{ i }}">
+        <label
+          nz-radio-button
+          *ngFor="let response of question.response"
+          nzValue="{{ response.title }}"
+          >{{ response.emote }} {{ response.title }}</label
+        >
+      </nz-radio-group>
+    </div>
+  </div>
+  <button nz-button nzType="primary" type="submit" [disabled]="!myForm.valid">
+    Valider
+  </button>
+</form>

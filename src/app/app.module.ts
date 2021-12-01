@@ -23,6 +23,12 @@ import { NzTypographyModule } from 'ng-zorro-antd/typography';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
+import { HomeService } from './services/home.service';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
+import { NzRadioModule } from 'ng-zorro-antd/radio';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 registerLocaleData(en);
 
@@ -49,8 +55,18 @@ registerLocaleData(en);
     NzInputModule,
     NzTypographyModule,
     NzTabsModule,
+    NzSelectModule,
+    NzInputNumberModule,
+    NzRadioModule,
+    NzSpinModule,
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }, AuthService, AuthGuard],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    AuthService,
+    AuthGuard,
+    HomeService,
+    NzModalService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
