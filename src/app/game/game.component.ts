@@ -9,6 +9,8 @@ import {
 import { QuestionResponse } from '../types/home';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Router } from '@angular/router';
+import { ResultService } from '../services/result.service';
+import { Score } from '../types/score';
 
 @Component({
   selector: 'app-game',
@@ -17,15 +19,18 @@ import { Router } from '@angular/router';
 })
 export class GameComponent implements OnInit {
   @Input() questions: any[] = [];
+  @Input() levelChoosed!: string;
+  @Input() categoryChoosed!: string;
+  @Input() nbQuestionChoosed!: number;
   myForm!: FormGroup;
   constructor(
     private fb: FormBuilder,
     private modal: NzModalService,
-    private router: Router
+    private router: Router,
+    private resultService: ResultService
   ) {}
 
   ngOnInit(): void {
-    console.log('game', this.questions);
     this.myForm = this.createModelForm();
     this.initFormControl();
   }
@@ -50,7 +55,17 @@ export class GameComponent implements OnInit {
         return this.getGoodAnswer(index) === val;
       }
     );
-    const score = isGoodAnswer.filter(Boolean).length;
+    const score: number = isGoodAnswer.filter(Boolean).length;
+    const scoreObj: Score = {
+      value: score,
+      nbQuestion: this.nbQuestionChoosed,
+      difficulty: this.levelChoosed,
+      theme: this.categoryChoosed,
+    };
+    this.resultService.addScore(scoreObj).subscribe(
+      (data) => console.log('addScore', data),
+      (err) => console.log(err)
+    );
     this.modal.success({
       nzTitle: 'Bien joué chef !',
       nzContent: `Tu as eu ${score} bonne(s) réponse(s) `,

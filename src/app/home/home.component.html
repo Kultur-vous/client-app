@@ -33,5 +33,10 @@
   </form>
 </div>
 <div *ngIf="questions && questions.length !== 0">
-  <app-game [questions]="questions"></app-game>
+  <app-game
+    [questions]="questions"
+    [levelChoosed]="levelChoosed"
+    [categoryChoosed]="categoryChoosed"
+    [nbQuestionChoosed]="nbQuestionChoosed"
+  ></app-game>
 </div>

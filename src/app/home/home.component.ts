@@ -15,6 +15,10 @@ export class HomeComponent implements OnInit {
   questions!: Question[];
   noQuestionWithThisCriteria = false;
 
+  levelChoosed!: string;
+  nbQuestionChoosed!: number;
+  categoryChoosed!: string;
+
   constructor(private fb: FormBuilder, private homeService: HomeService) {
     this.createForm();
   }
@@ -35,6 +39,9 @@ export class HomeComponent implements OnInit {
 
   handleSubmit() {
     console.log(this.form.value);
+    this.levelChoosed = this.form.value.level;
+    this.categoryChoosed = this.form.value.category;
+    this.nbQuestionChoosed = this.form.value.nbQuestions;
     this.homeService
       .getQuestions(
         this.form.value.level,

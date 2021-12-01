@@ -51,6 +51,7 @@ export class AuthComponent implements OnInit {
     this.authService.logIn(this.signInForm.value).subscribe(
       (user) => {
         const tokenDecoded = jwtDecode(user.token) as { exp: number };
+        console.log(user);
         if (Date.now() > tokenDecoded.exp * 1000) {
           localStorage.removeItem('token');
           this.errorSignIn = 'Token has expired';
@@ -59,6 +60,7 @@ export class AuthComponent implements OnInit {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('token', user.token);
         localStorage.setItem('email', user.email);
+        localStorage.setItem('userId', user.id);
 
         this.router.navigate(['']);
       },
@@ -78,6 +80,8 @@ export class AuthComponent implements OnInit {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('token', user.token);
         localStorage.setItem('email', user.email);
+        localStorage.setItem('userId', user.id);
+
         this.router.navigate(['']);
       },
       (err) => (this.errorSignUp = err.error)

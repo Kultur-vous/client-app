@@ -29,6 +29,7 @@ import { NzInputNumberModule } from 'ng-zorro-antd/input-number';
 import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { ResultService } from './services/result.service';
 
 registerLocaleData(en);
 
@@ -66,6 +67,7 @@ registerLocaleData(en);
     AuthGuard,
     HomeService,
     NzModalService,
+    ResultService,
   ],
   bootstrap: [AppComponent],
 })
