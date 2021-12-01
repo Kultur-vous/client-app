@@ -3,14 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard],
   },
   {
-    path: '',
+    path: 'login',
     component: AuthComponent,
   },
   { path: '**', component: PageNotFoundComponent },

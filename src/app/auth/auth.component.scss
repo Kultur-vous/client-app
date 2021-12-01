@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sign-in {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.error-message {
+  color: #d62828;
+}
