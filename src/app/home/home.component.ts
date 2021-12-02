@@ -39,9 +39,7 @@ export class HomeComponent implements OnInit {
 
   handleSubmit() {
     console.log(this.form.value);
-    this.levelChoosed = this.form.value.level;
-    this.categoryChoosed = this.form.value.category;
-    this.nbQuestionChoosed = this.form.value.nbQuestions;
+
     this.homeService
       .getQuestions(
         this.form.value.level,
@@ -55,6 +53,13 @@ export class HomeComponent implements OnInit {
           } else {
             this.noQuestionWithThisCriteria = false;
             this.questions = data as unknown as Question[];
+            this.levelChoosed = this.form.value.level;
+            this.categoryChoosed = this.form.value.category;
+            if (this.form.value.nbQuestions === this.questions.length) {
+              this.nbQuestionChoosed = this.form.value.nbQuestions;
+            } else {
+              this.nbQuestionChoosed = this.questions.length;
+            }
           }
         },
         (err) => console.log(err)

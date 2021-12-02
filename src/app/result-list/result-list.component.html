@@ -1,1 +1,16 @@
-<p>result-list works!</p>
+<div class="container">
+  <div *ngIf="!scores"><nz-spin nzSimple></nz-spin></div>
+  <div *ngIf="scores.length === 0">Pas de scores</div>
+  <div class="cards" *ngIf="scores && scores.length !== 0">
+    <nz-card
+      *ngFor="let score of scores"
+      nzTitle="{{ score.theme }} | {{ score.difficulty }}"
+    >
+      <p>🏁 {{ score.value }} / {{ score.nbQuestion }}</p>
+    </nz-card>
+  </div>
+
+  <button nz-button nzType="primary" (click)="restart()" class="button">
+    Rejouer
+  </button>
+</div>

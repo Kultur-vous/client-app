@@ -30,6 +30,7 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ResultService } from './services/result.service';
+import { NzCardModule } from 'ng-zorro-antd/card';
 
 registerLocaleData(en);
 
@@ -60,6 +61,7 @@ registerLocaleData(en);
     NzInputNumberModule,
     NzRadioModule,
     NzSpinModule,
+    NzCardModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
