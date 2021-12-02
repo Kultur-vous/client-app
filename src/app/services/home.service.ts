@@ -43,8 +43,6 @@ export class HomeService {
       return throwError('no token in local storage');
     }
 
-    console.log(options);
-
     return this.http
       .get<Question[]>(
         `${this.msQuestionsUrl}/questions?level=${level}&nbQuestion=${nbQuestions}&category=${category}`,

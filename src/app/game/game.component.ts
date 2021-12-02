@@ -43,7 +43,6 @@ export class GameComponent implements OnInit {
 
   initFormControl() {
     const formArray: FormArray = this.myForm.get('myChoices') as FormArray;
-    console.log('formArray', formArray);
     this.questions.forEach((q) =>
       formArray.push(new FormControl('', Validators.required))
     );

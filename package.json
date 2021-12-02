@@ -1,5 +1,5 @@
 {
-  "name": "boo-app",
+  "name": "boo-quiz",
   "version": "0.0.0",
   "scripts": {
     "postinstall": "npm i @angular/cli @angular-devkit/build-angular @angular/compiler-cli typescript --save-prod && ng build --prod",

@@ -7,8 +7,7 @@ import { DataScore, Score } from '../types/score';
 export class ResultService {
   constructor(private http: HttpClient) {}
 
-  // msScoreUrl = 'https://boo-score.herokuapp.com';
-  msScoreUrl = 'http://localhost:3002';
+  msScoreUrl = 'https://boo-score.herokuapp.com';
 
   addScore(score: Score) {
     const authToken = localStorage.getItem('token');

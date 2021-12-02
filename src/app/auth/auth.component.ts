@@ -51,7 +51,6 @@ export class AuthComponent implements OnInit {
     this.authService.logIn(this.signInForm.value).subscribe(
       (user) => {
         const tokenDecoded = jwtDecode(user.token) as { exp: number };
-        console.log(user);
         if (Date.now() > tokenDecoded.exp * 1000) {
           localStorage.removeItem('token');
           this.errorSignIn = 'Token has expired';

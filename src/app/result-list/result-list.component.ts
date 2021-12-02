@@ -19,9 +19,6 @@ export class ResultListComponent implements OnInit {
   getScores() {
     this.resultService.getScores().subscribe(
       (data) => {
-        console.log(
-          (data as unknown as DataScore[])[0].score as unknown as Score
-        );
         this.scores = (data as unknown as DataScore[])[0]
           .score as unknown as Score[];
       },

@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   signUp(user: UserSignIn): Observable<UserSignIn> {
-    console.log('service', user);
     return this.http.post<UserSignIn>(`${this.msAuthUrl}/sign-up`, user).pipe(
       catchError((err) => {
         console.log('error caught in service', err);
