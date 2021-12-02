@@ -1,6 +1,6 @@
 <div class="container">
   <div *ngIf="!scores"><nz-spin nzSimple></nz-spin></div>
-  <div *ngIf="scores.length === 0">Pas de scores</div>
+  <div *ngIf="scores && scores.length === 0">Pas de scores</div>
   <div class="cards" *ngIf="scores && scores.length !== 0">
     <nz-card
       *ngFor="let score of scores"
