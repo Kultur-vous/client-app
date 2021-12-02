@@ -10,7 +10,7 @@
     *ngIf="
       (!questions || questions.length === 0) &&
       levels && levels.length !== 0 &&
-      categories && categories.length === 0
+      categories && categories.length !== 0
     "
   >
     <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
