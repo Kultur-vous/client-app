@@ -1,8 +1,18 @@
 <div class="form">
-  <div *ngIf="!levels || !categories">
+  <div
+    *ngIf="
+      !levels || levels.length === 0 || categories.length === 0 || !categories
+    "
+  >
     <nz-spin nzSimple></nz-spin>
   </div>
-  <div *ngIf="(!questions || questions.length === 0) && levels && categories">
+  <div
+    *ngIf="
+      (!questions || questions.length === 0) &&
+      levels && levels.length !== 0 &&
+      categories && categories.length === 0
+    "
+  >
     <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
       <h2 nz-typography>Choisi ta partie et joue !</h2>
       <nz-input-number
