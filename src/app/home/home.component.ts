@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { HomeService } from '../services/home.service';
 import { Question } from '../types/home';
 
@@ -19,7 +20,11 @@ export class HomeComponent implements OnInit {
   nbQuestionChoosed!: number;
   categoryChoosed!: string;
 
-  constructor(private fb: FormBuilder, private homeService: HomeService) {
+  constructor(
+    private fb: FormBuilder,
+    private homeService: HomeService,
+    private router: Router
+  ) {
     this.createForm();
   }
 
@@ -77,5 +82,9 @@ export class HomeComponent implements OnInit {
       (data) => (this.levels = data),
       (err) => console.log(err)
     );
+  }
+
+  goScores() {
+    this.router.navigate(['results']);
   }
 }

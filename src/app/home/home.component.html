@@ -1,42 +1,65 @@
-<div *ngIf="!levels || !categories">
-  <nz-spin nzSimple></nz-spin>
-</div>
-<div *ngIf="(!questions || questions.length === 0) && levels && categories">
-  <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
-    <h2 nz-typography>Choisi ta partie et joue !</h2>
-    <nz-input-number
-      formControlName="nbQuestions"
-      [nzMin]="1"
-      [nzMax]="20"
-      [nzStep]="1"
-    ></nz-input-number>
-    <nz-select placeholder="Choisis la catégorie" formControlName="category">
-      <nz-option
-        *ngFor="let category of categories"
-        nzValue="{{ category }}"
-        nzLabel="{{ category }}"
-      ></nz-option>
-    </nz-select>
-    <nz-select placeholder="Choisis la difficulté" formControlName="level">
-      <nz-option
-        *ngFor="let level of levels"
-        nzValue="{{ level }}"
-        nzLabel="{{ level }}"
-      ></nz-option>
-    </nz-select>
-    <div *ngIf="noQuestionWithThisCriteria" class="error-message">
-      Aïe ! Nous ne trouvons pas de questions avec ce thème et ce niveau !
-    </div>
-    <button nz-button nzType="primary" type="submit" [disabled]="!form.valid">
-      Jouer
-    </button>
-  </form>
-</div>
-<div *ngIf="questions && questions.length !== 0">
-  <app-game
-    [questions]="questions"
-    [levelChoosed]="levelChoosed"
-    [categoryChoosed]="categoryChoosed"
-    [nbQuestionChoosed]="nbQuestionChoosed"
-  ></app-game>
+<div class="form">
+  <div
+    *ngIf="
+      !levels || levels.length === 0 || categories.length === 0 || !categories
+    "
+  >
+    <nz-spin nzSimple></nz-spin>
+  </div>
+  <div
+    *ngIf="
+      (!questions || questions.length === 0) &&
+      levels && levels.length !== 0 &&
+      categories && categories.length === 0
+    "
+  >
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()" class="form">
+      <h2 nz-typography>Choisi ta partie et joue !</h2>
+      <nz-input-number
+        formControlName="nbQuestions"
+        [nzMin]="1"
+        [nzMax]="20"
+        [nzStep]="1"
+      ></nz-input-number>
+      <nz-select placeholder="Choisis la catégorie" formControlName="category">
+        <nz-option
+          *ngFor="let category of categories"
+          nzValue="{{ category }}"
+          nzLabel="{{ category }}"
+        ></nz-option>
+      </nz-select>
+      <nz-select placeholder="Choisis la difficulté" formControlName="level">
+        <nz-option
+          *ngFor="let level of levels"
+          nzValue="{{ level }}"
+          nzLabel="{{ level }}"
+        ></nz-option>
+      </nz-select>
+      <div *ngIf="noQuestionWithThisCriteria" class="error-message">
+        Aïe ! Nous ne trouvons pas de questions avec ce thème et ce niveau !
+      </div>
+      <button nz-button nzType="primary" type="submit" [disabled]="!form.valid">
+        Jouer
+      </button>
+    </form>
+  </div>
+  <div *ngIf="questions && questions.length !== 0">
+    <app-game
+      [questions]="questions"
+      [levelChoosed]="levelChoosed"
+      [categoryChoosed]="categoryChoosed"
+      [nbQuestionChoosed]="nbQuestionChoosed"
+    ></app-game>
+  </div>
+
+  <button
+    nz-button
+    nzType="default"
+    (click)="goScores()"
+    class="button"
+    class="btn-score"
+    *ngIf="(!questions || questions.length === 0) && levels && categories"
+  >
+    Voir mes précédents scores
+  </button>
 </div>
